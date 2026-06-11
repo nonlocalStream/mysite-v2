@@ -1,8 +1,4 @@
----
-const base = import.meta.env.BASE_URL.replace(/\/?$/, "/");
----
-
-<svg class="hero-svg" viewBox="0 0 1440 480" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+<svg class="hero-svg hero-svg-desktop" viewBox="0 0 1440 480" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
   <defs>
     <filter id="blob-main" x="-60%" y="-60%" width="220%" height="220%">
       <feGaussianBlur in="SourceAlpha" stdDeviation="55" result="blur" />
@@ -29,5 +25,30 @@ const base = import.meta.env.BASE_URL.replace(/\/?$/, "/");
     <animate attributeName="rx" values="300;340;270;300" dur="9s" repeatCount="indefinite" calcMode="spline" keySplines="0.45 0 0.55 1;0.45 0 0.55 1;0.45 0 0.55 1" />
   </ellipse>
 </svg>
-<img class="hero-recording" src={`${base}hero/hero-mobile.webp`} alt="" aria-hidden="true" decoding="async" />
-<img class="hero-recording-poster" src={`${base}hero/hero-mobile-poster.png`} alt="" aria-hidden="true" decoding="async" />
+<svg class="hero-svg hero-svg-mobile" viewBox="0 0 390 430" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+  <defs>
+    <filter id="blob-mobile-main" x="-70%" y="-70%" width="240%" height="240%">
+      <feGaussianBlur in="SourceAlpha" stdDeviation="42" result="blur" />
+      <feTurbulence type="fractalNoise" baseFrequency="1.75" numOctaves="2" seed="11" result="noise" />
+      <feComposite in="noise" in2="blur" operator="arithmetic" k1="0" k2="1" k3="1" k4="-0.5" result="mixed" />
+      <feColorMatrix type="matrix" in="mixed" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 28 -10" result="dots" />
+      <feFlood flood-color="#5838A0" result="col" />
+      <feComposite in="col" in2="dots" operator="in" />
+    </filter>
+    <filter id="blob-mobile-soft" x="-70%" y="-70%" width="240%" height="240%">
+      <feGaussianBlur in="SourceAlpha" stdDeviation="34" result="blur" />
+      <feTurbulence type="fractalNoise" baseFrequency="1.8" numOctaves="2" seed="31" result="noise" />
+      <feComposite in="noise" in2="blur" operator="arithmetic" k1="0" k2="1" k3="1" k4="-0.5" result="mixed" />
+      <feColorMatrix type="matrix" in="mixed" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 28 -11" result="dots" />
+      <feFlood flood-color="#C098D0" result="col" />
+      <feComposite in="col" in2="dots" operator="in" />
+    </filter>
+  </defs>
+  <ellipse cx="420" cy="24" rx="230" ry="168" fill="#5838A0" filter="url(#blob-mobile-main)" opacity="0.86">
+    <animate attributeName="rx" values="230;248;218;230" dur="12s" repeatCount="indefinite" calcMode="spline" keySplines="0.45 0 0.55 1;0.45 0 0.55 1;0.45 0 0.55 1" />
+    <animate attributeName="ry" values="168;156;178;168" dur="14s" repeatCount="indefinite" calcMode="spline" keySplines="0.45 0 0.55 1;0.45 0 0.55 1;0.45 0 0.55 1" />
+  </ellipse>
+  <ellipse cx="396" cy="178" rx="104" ry="86" fill="#C098D0" filter="url(#blob-mobile-soft)" opacity="0.52">
+    <animate attributeName="rx" values="104;116;96;104" dur="10s" repeatCount="indefinite" calcMode="spline" keySplines="0.45 0 0.55 1;0.45 0 0.55 1;0.45 0 0.55 1" />
+  </ellipse>
+</svg>
