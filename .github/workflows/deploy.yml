@@ -23,6 +23,8 @@ jobs:
 
       - name: Build and upload
         uses: withastro/action@v6
+        env:
+          DEPLOY_TARGET: github-pages
 
   deploy:
     needs: build
