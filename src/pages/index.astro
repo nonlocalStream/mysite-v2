@@ -1,0 +1,70 @@
+---
+import { Image } from "astro:assets";
+import { getCollection } from "astro:content";
+import HeroBlob from "../components/HeroBlob.astro";
+import { works } from "../data/photos";
+import Base from "../layouts/Base.astro";
+
+const posts = (await getCollection("blog", ({ data }) => !data.draft)).sort(
+  (a, b) => b.data.date.valueOf() - a.data.date.valueOf()
+);
+const base = import.meta.env.BASE_URL.replace(/\/?$/, "/");
+
+const formatDate = (date: Date) =>
+  new Intl.DateTimeFormat("en", { month: "short", year: "numeric", timeZone: "UTC" }).format(date);
+---
+
+<Base title="CQ">
+  <header class="hero" id="top">
+    <HeroBlob />
+    <nav>
+      <a class="nav-name" href="#top">CQ</a>
+      <div class="nav-links">
+        <a href="#portfolio">Portfolio</a>
+        <a href="#blog">Blog</a>
+      </div>
+    </nav>
+    <div class="hero-text">
+      <p class="eyebrow">Oil / Watercolor / Acrylic</p>
+      <h1>Painting what<br /><em>machines cannot feel</em></h1>
+    </div>
+  </header>
+
+  <main>
+    <section class="section" id="portfolio">
+      <p class="section-label">Selected works</p>
+      <div class="works-grid">
+        {works.map((work) => (
+          <article class="work-card">
+            {work.src ? <Image src={work.src} alt={work.alt} loading="lazy" /> : <div class="work-placeholder"></div>}
+            <div class="work-label">
+              <span class="work-title">{work.title}</span>
+              <span class="meta">{work.meta}</span>
+            </div>
+          </article>
+        ))}
+      </div>
+    </section>
+
+    <section class="strip">
+      <p class="strip-quote">"Capturing the moment the self dissolves into landscape."</p>
+      <p class="strip-body">A decade of painting across oils, watercolor, and acrylics. Currently working on a first deliberate body of work from Patagonia.</p>
+    </section>
+
+    <section class="section blog" id="blog">
+      <p class="section-label">Writing</p>
+      <div class="blog-list">
+        {posts.map((post, index) => (
+          <article class="blog-item">
+            <span class="meta">{String(index + 1).padStart(3, "0")}</span>
+            <div>
+              <a class="blog-title" href={`${base}blog/${post.id}/`}>{post.data.title}</a>
+              <p class="blog-summary">{post.data.summary}</p>
+            </div>
+            <span class="meta post-date">{formatDate(post.data.date)}</span>
+          </article>
+        ))}
+      </div>
+    </section>
+  </main>
+</Base>

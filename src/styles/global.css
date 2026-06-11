@@ -1,0 +1,210 @@
+:root {
+  --paper: #F8F6F0;
+  --ink: #1a1a18;
+  --muted: #a09890;
+  --border: #d8d2c8;
+  --violet: #5838A0;
+}
+
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  margin: 0;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: "Cormorant Garamond", serif;
+}
+a { color: inherit; text-decoration: none; }
+
+.hero {
+  position: relative;
+  min-height: 470px;
+  overflow: hidden;
+  background: var(--paper);
+}
+.hero-svg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+nav {
+  position: absolute;
+  inset: 0 0 auto;
+  z-index: 3;
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  padding: 1.8rem 3rem;
+  font-family: "DM Mono", monospace;
+}
+.post-nav {
+  position: static;
+  border-bottom: 0.5px solid var(--border);
+}
+.nav-name {
+  font-size: 14px;
+  font-weight: 300;
+  letter-spacing: 0.08em;
+}
+.nav-links {
+  display: flex;
+  gap: 2.2rem;
+  color: #888880;
+  font-size: 12px;
+  letter-spacing: 0.06em;
+}
+.nav-links a:hover { color: var(--ink); }
+.hero-text {
+  position: absolute;
+  z-index: 2;
+  left: 3rem;
+  bottom: 3.5rem;
+}
+.eyebrow,
+.section-label {
+  margin: 0 0 0.9rem;
+  color: var(--muted);
+  font-family: "DM Mono", monospace;
+  font-size: 11px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+h1 {
+  margin: 0;
+  color: var(--ink);
+  font-size: 68px;
+  font-weight: 300;
+  line-height: 1.02;
+  letter-spacing: 0;
+}
+h1 em { color: var(--violet); font-style: italic; }
+
+.section { padding: 4rem 3rem; }
+.works-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 2px;
+}
+.work-card {
+  position: relative;
+  min-height: 220px;
+  overflow: hidden;
+  background: #e4ddd4;
+}
+.work-card:first-child { grid-column: span 2; }
+.work-card img,
+.work-placeholder {
+  width: 100%;
+  height: 100%;
+  min-height: 220px;
+  object-fit: cover;
+  display: block;
+}
+.work-placeholder { background: #e4ddd4; }
+.work-label {
+  position: absolute;
+  inset: auto 0 0;
+  padding: 1rem 1.2rem;
+  background: linear-gradient(transparent, rgba(248,246,240,0.96));
+}
+.work-title {
+  display: block;
+  font-size: 18px;
+  font-weight: 300;
+}
+.meta {
+  color: var(--muted);
+  font-family: "DM Mono", monospace;
+  font-size: 10px;
+  letter-spacing: 0.06em;
+}
+
+.strip {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4rem;
+  padding: 3rem;
+  border-top: 0.5px solid var(--border);
+}
+.strip-quote {
+  margin: 0;
+  color: #3d3530;
+  font-size: 24px;
+  font-style: italic;
+  font-weight: 300;
+  line-height: 1.45;
+}
+.strip-body,
+.blog-summary,
+.post-summary,
+.post-content {
+  color: #6b5a4e;
+  font-size: 15px;
+  font-weight: 300;
+  line-height: 1.8;
+}
+.strip-body,
+.blog-summary,
+.post-summary { margin: 0; }
+
+.blog-list { border-top: 0.5px solid var(--border); }
+.blog-item {
+  display: grid;
+  grid-template-columns: 80px 1fr auto;
+  gap: 2rem;
+  align-items: baseline;
+  padding: 1.4rem 0;
+  border-bottom: 0.5px solid var(--border);
+}
+.blog-title {
+  font-size: 20px;
+  font-weight: 300;
+  letter-spacing: 0;
+}
+.blog-title:hover { color: var(--muted); }
+.blog-summary { margin-top: 0.35rem; }
+
+.post-page { min-height: 100vh; }
+.post {
+  max-width: 760px;
+  padding: 5rem 3rem;
+}
+.post-summary {
+  margin-top: 1.25rem;
+  font-style: italic;
+}
+.post-content {
+  margin-top: 3rem;
+}
+.post-content p,
+.post-content ul,
+.post-content ol { margin: 0 0 1.4rem; }
+.post-content h2 {
+  margin: 2.4rem 0 0.8rem;
+  color: var(--ink);
+  font-size: 28px;
+  font-weight: 300;
+  line-height: 1.2;
+}
+
+@media (max-width: 760px) {
+  nav,
+  .section,
+  .strip,
+  .post {
+    padding-left: 1.25rem;
+    padding-right: 1.25rem;
+  }
+  .nav-links { gap: 1rem; }
+  .hero-text { left: 1.25rem; right: 1.25rem; }
+  .works-grid,
+  .strip,
+  .blog-item {
+    grid-template-columns: 1fr;
+  }
+  .work-card:first-child { grid-column: auto; }
+  .blog-item { gap: 0.5rem; }
+  .post-date { justify-self: start; }
+  h1 { font-size: 48px; }
+}
