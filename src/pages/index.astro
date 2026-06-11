@@ -2,7 +2,7 @@
 import { Image } from "astro:assets";
 import { getCollection } from "astro:content";
 import HeroBlob from "../components/HeroBlob.astro";
-import { works } from "../data/photos";
+import { workSections } from "../data/photos";
 import Base from "../layouts/Base.astro";
 
 const posts = (await getCollection("blog", ({ data }) => !data.draft)).sort(
@@ -33,15 +33,30 @@ const formatDate = (date: Date) =>
   <main>
     <section class="section" id="portfolio">
       <p class="section-label">Selected works</p>
-      <div class="works-grid">
-        {works.map((work) => (
-          <article class="work-card">
-            {work.src ? <Image src={work.src} alt={work.alt} loading="lazy" /> : <div class="work-placeholder"></div>}
-            <div class="work-label">
-              <span class="work-title">{work.title}</span>
-              <span class="meta">{work.meta}</span>
+      <div class="work-tabs" aria-label="Artwork sections">
+        {workSections.map((section) => (
+          <a href={`#${section.id}`}>{section.label}</a>
+        ))}
+      </div>
+      <div class="work-sections">
+        {workSections.map((section) => (
+          <section class="work-section" id={section.id} aria-labelledby={`${section.id}-title`}>
+            <div class="work-section-header">
+              <h2 id={`${section.id}-title`}>{section.label}</h2>
+              <span class="meta">{section.meta}</span>
             </div>
-          </article>
+            <div class="works-grid">
+              {section.works.map((work) => (
+                <article class="work-card">
+                  {work.src ? <Image src={work.src} alt={work.alt} loading="lazy" /> : <div class="work-placeholder"></div>}
+                  <div class="work-label">
+                    <span class="work-title">{work.title}</span>
+                    <span class="meta">{work.meta}</span>
+                  </div>
+                </article>
+              ))}
+            </div>
+          </section>
         ))}
       </div>
     </section>
