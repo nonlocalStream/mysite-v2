@@ -1,27 +1,14 @@
-<svg class="hero-svg" viewBox="0 0 1440 480" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
-  <defs>
-    <filter id="blob-main" x="-60%" y="-60%" width="220%" height="220%">
-      <feGaussianBlur in="SourceAlpha" stdDeviation="55" result="blur" />
-      <feTurbulence type="fractalNoise" baseFrequency="1.6" numOctaves="2" seed="5" result="noise" />
-      <feComposite in="noise" in2="blur" operator="arithmetic" k1="0" k2="1" k3="1" k4="-0.5" result="mixed" />
-      <feColorMatrix type="matrix" in="mixed" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 28 -8" result="dots" />
-      <feFlood flood-color="#5838A0" result="col" />
-      <feComposite in="col" in2="dots" operator="in" />
-    </filter>
-    <filter id="blob-soft" x="-60%" y="-60%" width="220%" height="220%">
-      <feGaussianBlur in="SourceAlpha" stdDeviation="40" result="blur" />
-      <feTurbulence type="fractalNoise" baseFrequency="1.6" numOctaves="2" seed="23" result="noise" />
-      <feComposite in="noise" in2="blur" operator="arithmetic" k1="0" k2="1" k3="1" k4="-0.5" result="mixed" />
-      <feColorMatrix type="matrix" in="mixed" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 28 -9" result="dots" />
-      <feFlood flood-color="#C098D0" result="col" />
-      <feComposite in="col" in2="dots" operator="in" />
-    </filter>
-  </defs>
-  <ellipse cx="1100" cy="160" rx="420" ry="340" fill="#5838A0" filter="url(#blob-main)">
-    <animate attributeName="rx" values="420;480;390;420" dur="11s" repeatCount="indefinite" calcMode="spline" keySplines="0.45 0 0.55 1;0.45 0 0.55 1;0.45 0 0.55 1" />
-    <animate attributeName="ry" values="340;310;365;340" dur="13s" repeatCount="indefinite" calcMode="spline" keySplines="0.45 0 0.55 1;0.45 0 0.55 1;0.45 0 0.55 1" />
-  </ellipse>
-  <ellipse cx="1250" cy="390" rx="300" ry="240" fill="#C098D0" filter="url(#blob-soft)">
-    <animate attributeName="rx" values="300;340;270;300" dur="9s" repeatCount="indefinite" calcMode="spline" keySplines="0.45 0 0.55 1;0.45 0 0.55 1;0.45 0 0.55 1" />
-  </ellipse>
-</svg>
+---
+const base = import.meta.env.BASE_URL.replace(/\/?$/, "/");
+---
+
+<div
+  class="hero-blob hero-blob-main"
+  style={`--blob-mask: url("${base}masks/hero-blob-main.png")`}
+  aria-hidden="true"
+></div>
+<div
+  class="hero-blob hero-blob-soft"
+  style={`--blob-mask: url("${base}masks/hero-blob-soft.png")`}
+  aria-hidden="true"
+></div>
