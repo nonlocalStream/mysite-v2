@@ -336,7 +336,6 @@ h1 em { color: var(--violet); font-style: italic; }
   .blog-item {
     grid-template-columns: 1fr;
   }
-  .work-card:first-child { grid-column: auto; }
   .work-section-header {
     display: block;
   }
