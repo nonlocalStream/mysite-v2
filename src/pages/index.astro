@@ -48,11 +48,13 @@ const formatDate = (date: Date) =>
             <div class="works-grid">
               {section.works.map((work) => (
                 <article class="work-card">
-                  {work.src ? <Image src={work.src} alt={work.alt} loading="lazy" /> : <div class="work-placeholder"></div>}
-                  <div class="work-label">
-                    <span class="work-title">{work.title}</span>
-                    <span class="meta">{work.meta}</span>
-                  </div>
+                  <button class="work-open" type="button" data-title={work.title} data-meta={work.meta} aria-label={`View ${work.title}`}>
+                    {work.src ? <Image src={work.src} alt={work.alt} loading="lazy" /> : <div class="work-placeholder"></div>}
+                    <span class="work-label">
+                      <span class="work-title">{work.title}</span>
+                      <span class="meta">{work.meta}</span>
+                    </span>
+                  </button>
                 </article>
               ))}
             </div>
@@ -60,6 +62,17 @@ const formatDate = (date: Date) =>
         ))}
       </div>
     </section>
+
+    <dialog class="work-lightbox" aria-label="Artwork detail">
+      <button class="lightbox-close" type="button" aria-label="Close artwork detail">Close</button>
+      <div class="lightbox-media-wrap">
+        <img class="lightbox-media" alt="" />
+      </div>
+      <div class="lightbox-details">
+        <h2 class="lightbox-title"></h2>
+        <p class="lightbox-meta meta"></p>
+      </div>
+    </dialog>
 
     <section class="strip">
       <p class="strip-quote">"Capturing the moment the self dissolves into landscape."</p>
@@ -83,3 +96,30 @@ const formatDate = (date: Date) =>
     </section>
   </main>
 </Base>
+
+<script>
+  const lightbox = document.querySelector(".work-lightbox");
+  const lightboxImage = lightbox?.querySelector(".lightbox-media");
+  const lightboxTitle = lightbox?.querySelector(".lightbox-title");
+  const lightboxMeta = lightbox?.querySelector(".lightbox-meta");
+  const closeButton = lightbox?.querySelector(".lightbox-close");
+
+  document.querySelectorAll(".work-open").forEach((button) => {
+    button.addEventListener("click", () => {
+      const image = button.querySelector("img");
+      if (!lightbox || !lightboxImage || !lightboxTitle || !lightboxMeta || !image) return;
+
+      lightboxImage.src = image.currentSrc || image.src;
+      lightboxImage.alt = image.alt;
+      lightboxTitle.textContent = button.getAttribute("data-title") ?? "";
+      lightboxMeta.textContent = button.getAttribute("data-meta") ?? "";
+      lightbox.showModal();
+      closeButton?.focus();
+    });
+  });
+
+  closeButton?.addEventListener("click", () => lightbox?.close());
+  lightbox?.addEventListener("click", (event) => {
+    if (event.target === lightbox) lightbox.close();
+  });
+</script>
