@@ -47,7 +47,7 @@ const formatDate = (date: Date) =>
             </div>
             <div class="works-grid">
               {section.works.map((work) => (
-                <article class="work-card">
+                <article class:list={["work-card", work.size && `work-card--${work.size}`]}>
                   <button class="work-open" type="button" data-title={work.title} data-meta={work.meta} aria-label={`View ${work.title}`}>
                     {work.src ? <Image src={work.src} alt={work.alt} loading="lazy" /> : <div class="work-placeholder"></div>}
                     <span class="work-label">

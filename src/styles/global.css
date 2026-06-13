@@ -134,7 +134,8 @@ h1 em { color: var(--violet-mid); font-style: italic; }
 .works-grid {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 1.35rem;
+  grid-auto-flow: dense;
+  gap: 2rem;
 }
 .work-card {
   position: relative;
@@ -143,6 +144,14 @@ h1 em { color: var(--violet-mid); font-style: italic; }
   overflow: hidden;
   border: 0.5px solid var(--border);
   background: #eee9df;
+}
+.work-card--featured {
+  grid-column: span 2;
+}
+.work-card--tall {
+  grid-column: span 2;
+  grid-row: span 2;
+  aspect-ratio: 3 / 4;
 }
 .work-open {
   position: relative;
@@ -476,7 +485,12 @@ h1 em { color: var(--violet-mid); font-style: italic; }
     grid-template-columns: 1fr;
   }
   .works-grid {
-    gap: 0.9rem;
+    gap: 1.25rem;
+  }
+  .work-card--featured,
+  .work-card--tall {
+    grid-column: auto;
+    grid-row: auto;
   }
   .work-section-header {
     display: block;
